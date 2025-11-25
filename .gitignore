@@ -1,0 +1,24 @@
+.env
+.env.*
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+dist/
+build/
+.venv/
+.vscode/
+.idea/
+
+# Data artifacts
+data/raw/
+data/processed/
+notebooks/.ipynb_checkpoints/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
