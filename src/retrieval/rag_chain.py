@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import re
+import time
 from collections import Counter
+from functools import lru_cache
 from pathlib import Path
 from typing import Iterable, List
 
@@ -15,6 +18,12 @@ from sentence_transformers import SentenceTransformer
 
 from src.config.settings import get_settings
 from src.llm.clients import call_xai_chat
+
+
+# Simple in-memory cache for retrieval results
+_retrieval_cache: dict[str, tuple[list[dict], float]] = {}
+_CACHE_TTL_SECONDS = 300  # 5 minutes
+_CACHE_MAX_SIZE = 100
 
 
 def tokenize(text: str) -> list[str]:
@@ -102,22 +111,45 @@ class HybridRetriever:
         self.lexical = lexical_corpus
 
     def _vector_results(self, query: str, limit: int) -> list[dict]:
-        vector = self.embedder.encode(query).tolist()
-        hits = self.client.search(
-            collection_name=self.collection,
-            query_vector=vector,
-            limit=limit,
-            with_payload=True,
-        )
-        return [
-            {"id": hit.id, "text": hit.payload["text"], "score": float(hit.score)}
-            for hit in hits
-        ]
+        try:
+            vector = self.embedder.encode(query).tolist()
+            hits = self.client.search(
+                collection_name=self.collection,
+                query_vector=vector,
+                limit=limit,
+                with_payload=True,
+            )
+            return [
+                {"id": hit.id, "text": hit.payload.get("text", ""), "score": float(hit.score)}
+                for hit in hits
+                if hit.payload
+            ]
+        except Exception as e:
+            print(f"Qdrant search error: {e}")
+            return []
 
     def retrieve(self, query: str, limit: int = 6) -> list[dict]:
+        # Check cache first
+        cache_key = hashlib.sha256(f"{query}:{limit}".encode()).hexdigest()[:16]
+        now = time.time()
+
+        if cache_key in _retrieval_cache:
+            cached_result, cached_time = _retrieval_cache[cache_key]
+            if now - cached_time < _CACHE_TTL_SECONDS:
+                return cached_result
+
+        # Perform retrieval
         vector_hits = self._vector_results(query, limit)
         lexical_hits = self.lexical.search(query, limit * 2) if self.lexical else []
         combined = self._rrf(vector_hits, lexical_hits, limit)
+
+        # Cache result (with size limit)
+        if len(_retrieval_cache) >= _CACHE_MAX_SIZE:
+            # Evict oldest entry
+            oldest_key = min(_retrieval_cache, key=lambda k: _retrieval_cache[k][1])
+            del _retrieval_cache[oldest_key]
+        _retrieval_cache[cache_key] = (combined, now)
+
         return combined
 
     def _rrf(self, vector_hits: list[dict], lexical_hits: list[dict], limit: int) -> list[dict]:
@@ -145,6 +177,14 @@ class RAGChain:
 
     def invoke(self, question: str, k: int = 6) -> dict:
         docs = self.retriever.retrieve(question, limit=k)
+
+        # Handle empty results gracefully
+        if not docs:
+            return {
+                "answer": "No relevant customer reviews found for this query. The review database may need to be indexed.",
+                "sources": []
+            }
+
         context = self._format_context(docs)
         messages = [
             {
@@ -159,7 +199,11 @@ class RAGChain:
                 "content": f"Context:\n{context}\n\nQuestion: {question}",
             },
         ]
-        answer = call_xai_chat(messages, max_tokens=700)
+        try:
+            answer = call_xai_chat(messages, max_tokens=700)
+        except Exception as e:
+            answer = f"Error generating response: {str(e)}"
+
         return {"answer": answer, "sources": docs}
 
     @staticmethod

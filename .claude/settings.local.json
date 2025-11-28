@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:kit-mcp.cased.com)",
+      "mcp__kit-dev__open_repository",
+      "mcp__kit-dev__grep_code",
+      "Bash(.venvScriptspip.exe install boto3 botocore)",
+      "WebFetch(domain:discuss.streamlit.io)",
+      "Bash(..venvScriptspip.exe list)",
+      "Bash(.venvScriptspip.exe list)",
+      "Bash(findstr:*)",
+      "Bash(cmd /c \".venv\\Scripts\\pip.exe list\")",
+      "Bash(cmd /c \"mkdir C:\\Users\\Simon\\Project_Wifi\\data\\feedback 2>nul || echo Directory exists\")",
+      "Bash(cmd /c \".venv\\Scripts\\pip.exe install fpdf2\")",
+      "Bash(cmd /c \"C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\python.exe scripts\\test_aws.py\")",
+      "Bash(powershell -Command \"cd C:\\Users\\Simon\\Project_Wifi; .\\.venv\\Scripts\\python.exe scripts\\quick_aws_test.py\")",
+      "Bash(powershell -Command \"cd C:\\Users\\Simon\\Project_Wifi; .\\.venv\\Scripts\\pip.exe install boto3\")",
+      "Bash(powershell -Command \"C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\pip.exe install boto3\")",
+      "Bash(powershell -Command \"& ''C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\python.exe'' -m pip install boto3\")",
+      "Bash(powershell -Command \"& ''C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\python.exe'' -m uv pip install boto3\")",
+      "Bash(powershell -Command \"uv pip install boto3 --python C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\python.exe\")",
+      "Bash(powershell -Command \"cd C:\\Users\\Simon\\Project_Wifi; & ''.\\.venv\\Scripts\\python.exe'' scripts\\quick_aws_test.py\")",
+      "Bash(powershell -Command:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

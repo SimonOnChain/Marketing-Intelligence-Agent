@@ -1,0 +1,2320 @@
+/* Marketing Intelligence Platform - Enterprise Dark Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Root variables for consistent theming */
+:root {
+    --bg-primary: #08080c;
+    --bg-secondary: #0c0c12;
+    --bg-tertiary: #10101a;
+    --bg-card: rgba(12, 12, 18, 0.9);
+    --border-subtle: rgba(255, 255, 255, 0.04);
+    --border-light: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.45);
+    --accent-blue: #4a6cf7;
+    --accent-green: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+}
+
+.stApp {
+    background: var(--bg-primary);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(74, 108, 247, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(16, 185, 129, 0.04), transparent);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    position: relative;
+}
+
+/* Animated grid background */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+    animation: grid-pulse 8s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+}
+
+/* Floating particles effect */
+.stApp::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(74, 108, 247, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: ambient-glow 12s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-glow {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 0.8; transform: scale(1.1); }
+}
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+.stDeployButton {display: none;}
+
+.main .block-container {
+    padding: 1.5rem 2rem;
+    max-width: 1800px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.header-container {
+    background: linear-gradient(135deg, rgba(12, 12, 18, 0.95) 0%, rgba(16, 16, 24, 0.9) 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(74, 108, 247, 0.3), transparent);
+}
+
+.header-title {
+    color: var(--text-primary);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0.4rem 0 0 0;
+    letter-spacing: 0.01em;
+}
+
+/* Stats cards */
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.stat-card:hover::after {
+    left: 100%;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-detail {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.72rem;
+    margin-top: 0.5rem;
+}
+
+/* Section titles */
+.section-title {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-badge {
+    background: rgba(100, 130, 255, 0.15);
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Chat messages */
+.chat-message {
+    background: rgba(15, 15, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.chat-message.user {
+    background: rgba(100, 130, 255, 0.1);
+    border-color: rgba(100, 130, 255, 0.2);
+    margin-left: 2rem;
+}
+
+.chat-message.assistant {
+    background: rgba(15, 15, 22, 0.8);
+    margin-right: 2rem;
+}
+
+.chat-sender {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.chat-content {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Intent badge */
+.intent-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-right: 8px;
+}
+
+.intent-badge.sales { border-color: rgba(100, 130, 255, 0.4); color: rgba(100, 130, 255, 0.9); }
+.intent-badge.sentiment { border-color: rgba(255, 180, 100, 0.4); color: rgba(255, 180, 100, 0.9); }
+.intent-badge.forecast { border-color: rgba(100, 255, 180, 0.4); color: rgba(100, 255, 180, 0.9); }
+
+/* Follow-up suggestions */
+.followup-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 4px;
+}
+
+.followup-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+/* Feedback buttons */
+.feedback-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feedback-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.feedback-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.feedback-btn.positive:hover {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.4);
+}
+
+.feedback-btn.negative:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Filter panel */
+.filter-panel {
+    background: rgba(12, 12, 18, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Insights */
+.insight-card {
+    background: rgba(15, 15, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.insight-card.positive { border-left: 3px solid rgba(34, 197, 94, 0.6); }
+.insight-card.warning { border-left: 3px solid rgba(251, 191, 36, 0.6); }
+.insight-card.info { border-left: 3px solid rgba(59, 130, 246, 0.6); }
+
+.insight-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+}
+
+.insight-desc {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+/* Input styling */
+.stTextArea textarea, .stTextInput input {
+    background: rgba(10, 10, 15, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.9rem !important;
+}
+
+.stTextArea textarea:focus, .stTextInput input:focus {
+    border-color: rgba(100, 130, 255, 0.4) !important;
+    box-shadow: 0 0 0 2px rgba(100, 130, 255, 0.1) !important;
+}
+
+/* Buttons */
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, rgba(100, 130, 255, 0.3) 0%, rgba(100, 130, 255, 0.15) 100%) !important;
+    border: 1px solid rgba(100, 130, 255, 0.4) !important;
+    border-radius: 8px !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background: linear-gradient(135deg, rgba(100, 130, 255, 0.4) 0%, rgba(100, 130, 255, 0.2) 100%) !important;
+    transform: translateY(-1px) !important;
+}
+
+.stButton > button {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.85rem !important;
+}
+
+.stButton > button:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    background: transparent;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.stTabs [data-baseweb="tab"]:hover { color: rgba(255, 255, 255, 0.7); }
+.stTabs [aria-selected="true"] {
+    border-bottom: 2px solid rgba(100, 130, 255, 0.8);
+    color: #ffffff;
+}
+
+/* Charts */
+.stPlotlyChart {
+    background: rgba(10, 10, 15, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 0.75rem;
+}
+
+/* Select boxes */
+.stSelectbox > div > div {
+    background: rgba(10, 10, 15, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Date input */
+.stDateInput > div > div > input {
+    background: rgba(10, 10, 15, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Multiselect */
+.stMultiSelect > div > div {
+    background: rgba(10, 10, 15, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background: rgba(15, 15, 20, 0.6) !important;
+    border-radius: 8px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Metrics */
+[data-testid="stMetricValue"] { color: #ffffff !important; font-weight: 600 !important; }
+[data-testid="stMetricLabel"] { color: rgba(255, 255, 255, 0.4) !important; }
+
+/* Dataframe */
+.stDataFrame { border-radius: 8px !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* Ask AI button on charts */
+.ask-ai-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(100, 130, 255, 0.2);
+    border: 1px solid rgba(100, 130, 255, 0.4);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    color: rgba(100, 130, 255, 0.9);
+    cursor: pointer;
+}
+
+/* Status indicators */
+.status-online { color: rgba(34, 197, 94, 0.9); font-size: 0.75rem; }
+.status-offline { color: rgba(239, 68, 68, 0.9); font-size: 0.75rem; }
+
+/* Response metrics */
+.response-metrics {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 0.75rem;
+}
+
+.response-metric {
+    text-align: center;
+}
+
+.metric-value {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.metric-label {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* AI Response Content Styling */
+.ai-response-content {
+    background: rgba(12, 12, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 0.75rem 0;
+    line-height: 1.7;
+}
+
+.ai-response-content h1, .ai-response-content h2, .ai-response-content h3 {
+    color: #ffffff;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.ai-response-content h1 { font-size: 1.3rem; }
+.ai-response-content h2 { font-size: 1.15rem; }
+.ai-response-content h3 { font-size: 1rem; }
+
+.ai-response-content p {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.875rem;
+    font-size: 0.95rem;
+}
+
+.ai-response-content ul, .ai-response-content ol {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+}
+
+.ai-response-content li {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.ai-response-content strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.ai-response-content em {
+    color: rgba(100, 130, 255, 0.9);
+    font-style: italic;
+}
+
+.ai-response-content code {
+    background: rgba(100, 130, 255, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: rgba(100, 130, 255, 0.9);
+}
+
+/* Recommendation box */
+.recommendation-box {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+}
+
+.recommendation-box strong {
+    color: rgba(34, 197, 94, 0.9);
+}
+
+/* Streamlit markdown styling override */
+.stMarkdown {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    margin-top: 1rem !important;
+}
+
+.stMarkdown p {
+    line-height: 1.7 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.stMarkdown ul, .stMarkdown ol {
+    margin: 0.5rem 0 !important;
+    padding-left: 1.5rem !important;
+}
+
+.stMarkdown li {
+    margin-bottom: 0.4rem !important;
+    line-height: 1.6 !important;
+}
+
+.stMarkdown strong {
+    color: #ffffff !important;
+}
+
+/* Number formatting in lists */
+.stMarkdown ol li::marker {
+    color: rgba(100, 130, 255, 0.9);
+    font-weight: 600;
+}
+
+/* AWS Comprehend Section */
+.comprehend-card {
+    background: linear-gradient(135deg, rgba(20, 20, 35, 0.9) 0%, rgba(25, 25, 45, 0.8) 100%);
+    border: 1px solid rgba(100, 130, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+}
+
+.comprehend-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.comprehend-title {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.comprehend-badge {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.2) 0%, rgba(255, 153, 0, 0.1) 100%);
+    border: 1px solid rgba(255, 153, 0, 0.3);
+    color: rgba(255, 153, 0, 0.9);
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sentiment-meter {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    height: 8px;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+
+.sentiment-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease;
+}
+
+.sentiment-positive { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.sentiment-negative { background: linear-gradient(90deg, #ef4444, #f87171); }
+.sentiment-neutral { background: linear-gradient(90deg, #6b7280, #9ca3af); }
+.sentiment-mixed { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+.sentiment-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+}
+
+.sentiment-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.sentiment-stat-value {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.sentiment-stat-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.key-phrases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.75rem;
+}
+
+.phrase-tag {
+    background: rgba(100, 130, 255, 0.15);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.issue-tag {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: rgba(239, 68, 68, 0.9);
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+/* Feedback Analytics Styles */
+.fb-metric-card {
+    background: linear-gradient(135deg, rgba(15, 15, 25, 0.9) 0%, rgba(20, 20, 35, 0.7) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.fb-metric-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.fb-metric-card.positive {
+    border-left: 4px solid rgba(34, 197, 94, 0.8);
+}
+
+.fb-metric-card.negative {
+    border-left: 4px solid rgba(239, 68, 68, 0.8);
+}
+
+.fb-metric-card.neutral {
+    border-left: 4px solid rgba(100, 130, 255, 0.8);
+}
+
+.fb-metric-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.fb-metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.fb-metric-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+}
+
+.fb-metric-delta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.fb-metric-delta.up {
+    background: rgba(34, 197, 94, 0.15);
+    color: rgba(34, 197, 94, 0.9);
+}
+
+.fb-metric-delta.down {
+    background: rgba(239, 68, 68, 0.15);
+    color: rgba(239, 68, 68, 0.9);
+}
+
+.fb-metric-delta.neutral {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.fb-empty-state {
+    background: linear-gradient(135deg, rgba(15, 15, 25, 0.8) 0%, rgba(20, 20, 40, 0.6) 100%);
+    border: 2px dashed rgba(100, 130, 255, 0.3);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.fb-empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.fb-empty-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.fb-empty-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.fb-progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.fb-progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.fb-progress-fill.green {
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.8), rgba(34, 197, 94, 0.6));
+}
+
+.fb-progress-fill.yellow {
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.8), rgba(251, 191, 36, 0.6));
+}
+
+.fb-progress-fill.red {
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.8), rgba(239, 68, 68, 0.6));
+}
+
+.fb-suggestion-card {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.fb-suggestion-card.positive {
+    border-left: 3px solid rgba(34, 197, 94, 0.7);
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.05), transparent);
+}
+
+.fb-suggestion-card.warning {
+    border-left: 3px solid rgba(251, 191, 36, 0.7);
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.05), transparent);
+}
+
+.fb-suggestion-card.alert {
+    border-left: 3px solid rgba(239, 68, 68, 0.7);
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.05), transparent);
+}
+
+.fb-suggestion-card.info {
+    border-left: 3px solid rgba(100, 130, 255, 0.7);
+    background: linear-gradient(90deg, rgba(100, 130, 255, 0.05), transparent);
+}
+
+.fb-suggestion-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.fb-suggestion-text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.fb-history-item {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.fb-history-item:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(15, 15, 22, 0.8);
+}
+
+.fb-history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.fb-history-rating {
+    font-size: 1.1rem;
+}
+
+.fb-history-time {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+}
+
+.fb-history-query {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.fb-agent-badge {
+    display: inline-block;
+    background: rgba(100, 130, 255, 0.15);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+    margin-top: 6px;
+}
+
+.fb-chart-container {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.fb-chart-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ============================================
+   Dashboard KPI Cards
+   ============================================ */
+
+.kpi-card {
+    background: linear-gradient(135deg, rgba(20, 20, 35, 0.95) 0%, rgba(25, 25, 45, 0.85) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(100, 130, 255, 0.8), rgba(34, 197, 94, 0.8));
+}
+
+.kpi-card:hover {
+    border-color: rgba(100, 130, 255, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.kpi-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.kpi-icon-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    background: rgba(74, 108, 247, 0.15);
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+    letter-spacing: 0.05em;
+    font-family: 'Inter', monospace;
+}
+
+.kpi-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.kpi-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-delta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.kpi-delta.positive {
+    background: rgba(34, 197, 94, 0.15);
+    color: rgba(34, 197, 94, 0.9);
+}
+
+.kpi-delta.negative {
+    background: rgba(239, 68, 68, 0.15);
+    color: rgba(239, 68, 68, 0.9);
+}
+
+.kpi-delta.neutral {
+    background: rgba(100, 130, 255, 0.15);
+    color: rgba(100, 130, 255, 0.9);
+}
+
+/* ============================================
+   Alert Cards
+   ============================================ */
+
+.alert-card {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.alert-card:hover {
+    background: rgba(20, 20, 30, 0.9);
+}
+
+.alert-card.critical {
+    border-left: 4px solid rgba(239, 68, 68, 0.8);
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.08), transparent);
+}
+
+.alert-card.warning {
+    border-left: 4px solid rgba(251, 191, 36, 0.8);
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.08), transparent);
+}
+
+.alert-card.positive {
+    border-left: 4px solid rgba(34, 197, 94, 0.8);
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.08), transparent);
+}
+
+.alert-card.info {
+    border-left: 4px solid rgba(100, 130, 255, 0.8);
+    background: linear-gradient(90deg, rgba(100, 130, 255, 0.08), transparent);
+}
+
+.alert-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.alert-message {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+
+.alert-time {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Loading Skeleton
+   ============================================ */
+
+.loading-skeleton {
+    padding: 1rem;
+}
+
+.skeleton-line {
+    height: 16px;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+@keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   Session History Items
+   ============================================ */
+
+.session-item {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.session-item:hover {
+    background: rgba(20, 20, 30, 0.8);
+    border-color: rgba(100, 130, 255, 0.3);
+}
+
+.session-active {
+    background: rgba(100, 130, 255, 0.1);
+    border: 1px solid rgba(100, 130, 255, 0.4);
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.session-preview {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.session-time {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.65rem;
+    margin-top: 0.25rem;
+}
+
+/* ============================================
+   Copy Button
+   ============================================ */
+
+.copy-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.copy-btn:hover {
+    background: rgba(100, 130, 255, 0.2);
+    border-color: rgba(100, 130, 255, 0.4);
+}
+
+/* ============================================
+   Section Badge Alert Variant
+   ============================================ */
+
+.section-badge.alert {
+    background: rgba(239, 68, 68, 0.15);
+    color: rgba(239, 68, 68, 0.9);
+    animation: pulse-alert 2s infinite;
+}
+
+@keyframes pulse-alert {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ============================================
+   Follow-up Suggestions
+   ============================================ */
+
+.suggestion-chip {
+    background: rgba(100, 130, 255, 0.1);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    color: rgba(100, 130, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin: 4px;
+}
+
+.suggestion-chip:hover {
+    background: rgba(100, 130, 255, 0.2);
+    border-color: rgba(100, 130, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   Expander Improvements
+   ============================================ */
+
+[data-testid="stExpander"] {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+}
+
+[data-testid="stExpander"] summary {
+    padding: 0.75rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+[data-testid="stExpander"] summary:hover {
+    color: #ffffff;
+}
+
+/* ============================================
+   AI Insights Panel
+   ============================================ */
+
+.insight-card {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(4px);
+}
+
+.insight-card.positive {
+    border-left: 4px solid rgba(34, 197, 94, 0.8);
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.06), transparent);
+}
+
+.insight-card.warning {
+    border-left: 4px solid rgba(251, 191, 36, 0.8);
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.06), transparent);
+}
+
+.insight-card.info {
+    border-left: 4px solid rgba(100, 130, 255, 0.8);
+    background: linear-gradient(90deg, rgba(100, 130, 255, 0.06), transparent);
+}
+
+.insight-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.insight-content {
+    flex-grow: 1;
+}
+
+.insight-title {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.insight-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+/* ============================================
+   Mini Stats Cards (Period Comparison)
+   ============================================ */
+
+.mini-stat-card {
+    background: rgba(20, 20, 35, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    text-align: center;
+}
+
+.mini-stat-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+}
+
+.mini-stat-value {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   Change Indicator
+   ============================================ */
+
+.change-indicator {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.change-indicator.positive {
+    border-color: rgba(34, 197, 94, 0.3);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), transparent);
+}
+
+.change-indicator.negative {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), transparent);
+}
+
+.change-value {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.change-indicator.positive .change-value {
+    color: rgba(34, 197, 94, 0.9);
+}
+
+.change-indicator.negative .change-value {
+    color: rgba(239, 68, 68, 0.9);
+}
+
+/* ============================================
+   Highlight Card (Top Category)
+   ============================================ */
+
+.highlight-card {
+    background: linear-gradient(135deg, rgba(100, 130, 255, 0.15) 0%, rgba(100, 130, 255, 0.05) 100%);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.highlight-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-value {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.highlight-detail {
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   Activity Feed
+   ============================================ */
+
+.activity-item {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+    background: rgba(20, 20, 30, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.activity-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.activity-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.activity-time {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+}
+
+.activity-empty {
+    background: rgba(15, 15, 22, 0.5);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   ML Analytics Cards
+   ============================================ */
+
+.ml-insight-card {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.ml-insight-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.ml-insight-card.positive {
+    border-left: 4px solid rgba(34, 197, 94, 0.8);
+    background: linear-gradient(90deg, rgba(34, 197, 94, 0.06), transparent);
+}
+
+.ml-insight-card.warning {
+    border-left: 4px solid rgba(251, 191, 36, 0.8);
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.06), transparent);
+}
+
+.ml-insight-card.critical {
+    border-left: 4px solid rgba(239, 68, 68, 0.8);
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.06), transparent);
+}
+
+.ml-insight-title {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.ml-insight-metric {
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 4px 0;
+}
+
+.ml-insight-detail {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+.ml-summary {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.875rem 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   Elasticity Legend
+   ============================================ */
+
+.elasticity-legend {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 0.75rem;
+    background: rgba(15, 15, 22, 0.5);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.elastic {
+    background: #ef4444;
+}
+
+.dot.unit {
+    background: #6482ff;
+}
+
+.dot.inelastic {
+    background: #22c55e;
+}
+
+/* ============================================
+   Churn Metric Cards
+   ============================================ */
+
+.churn-metric-card {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.churn-metric-card.critical {
+    border-left: 4px solid rgba(239, 68, 68, 0.8);
+}
+
+.churn-metric-card.warning {
+    border-left: 4px solid rgba(251, 191, 36, 0.8);
+}
+
+.churn-metric-card.positive {
+    border-left: 4px solid rgba(34, 197, 94, 0.8);
+}
+
+.churn-metric-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+}
+
+.churn-metric-value {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   Bundle Cards
+   ============================================ */
+
+.bundle-card {
+    background: linear-gradient(135deg, rgba(100, 130, 255, 0.1) 0%, rgba(100, 130, 255, 0.05) 100%);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.bundle-title {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.bundle-rec {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.bundle-opp {
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   Association Rows
+   ============================================ */
+
+.assoc-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.assoc-pair {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.assoc-lift {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.assoc-lift.strong {
+    background: rgba(34, 197, 94, 0.15);
+    color: rgba(34, 197, 94, 0.9);
+}
+
+.assoc-lift.moderate {
+    background: rgba(100, 130, 255, 0.15);
+    color: rgba(100, 130, 255, 0.9);
+}
+
+.assoc-conf {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+/* ============================================
+   ChatGPT-Style Thinking Animation
+   ============================================ */
+
+.thinking-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(100, 130, 255, 0.08) 0%, rgba(100, 130, 255, 0.03) 100%);
+    border: 1px solid rgba(100, 130, 255, 0.2);
+    border-radius: 16px;
+    margin: 1rem 0;
+}
+
+.thinking-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6482ff 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.thinking-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.thinking-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.thinking-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.thinking-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(100, 130, 255, 0.8);
+    animation: thinking-bounce 1.4s ease-in-out infinite;
+}
+
+.thinking-dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.thinking-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.thinking-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes thinking-bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-8px);
+        opacity: 1;
+    }
+}
+
+.thinking-stage {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+/* ============================================
+   AI Confidence Indicator
+   ============================================ */
+
+.confidence-badge {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    min-width: 120px;
+    height: 22px;
+    padding: 0 10px;
+    border-radius: 11px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.confidence-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 11px;
+    opacity: 0.3;
+    transition: width 0.3s ease;
+}
+
+.confidence-text {
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Source cards for rich media */
+.source-card {
+    background: rgba(15, 15, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.source-title {
+    color: rgba(100, 130, 255, 0.9);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.source-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+/* Response metadata */
+.response-meta {
+    display: flex;
+    gap: 15px;
+    padding: 8px 0;
+    margin-top: 8px;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   Interactive Onboarding
+   ============================================ */
+
+.onboarding-overlay {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid rgba(100, 130, 255, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.onboarding-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.onboarding-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.onboarding-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+}
+
+.onboarding-steps {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.onboarding-step {
+    background: rgba(20, 20, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 200px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.onboarding-step:hover {
+    border-color: rgba(100, 130, 255, 0.5);
+    transform: translateY(-4px);
+}
+
+.onboarding-step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.onboarding-step-title {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.onboarding-step-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.onboarding-cta {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.onboarding-dismiss {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   NPS Score Gauge
+   ============================================ */
+
+.nps-container {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.nps-score {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+}
+
+.nps-score.excellent {
+    color: #22c55e;
+}
+
+.nps-score.good {
+    color: #84cc16;
+}
+
+.nps-score.okay {
+    color: #f59e0b;
+}
+
+.nps-score.poor {
+    color: #ef4444;
+}
+
+.nps-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.nps-category {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.nps-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nps-scale-item {
+    text-align: center;
+    flex: 1;
+}
+
+.nps-scale-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.nps-scale-label {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+}
+
+/* ============================================
+   Feedback Trend Chart Container
+   ============================================ */
+
+.trend-container {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.trend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.trend-title {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.trend-badge {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.trend-badge.up {
+    background: rgba(34, 197, 94, 0.15);
+    color: rgba(34, 197, 94, 0.9);
+}
+
+.trend-badge.down {
+    background: rgba(239, 68, 68, 0.15);
+    color: rgba(239, 68, 68, 0.9);
+}
+
+.trend-badge.neutral {
+    background: rgba(100, 130, 255, 0.15);
+    color: rgba(100, 130, 255, 0.9);
+}
+
+/* ============================================
+   Agent Performance Cards
+   ============================================ */
+
+.agent-perf-card {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.agent-perf-rank {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.agent-perf-rank.gold {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+}
+
+.agent-perf-rank.silver {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    color: #1a1a1a;
+}
+
+.agent-perf-rank.bronze {
+    background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
+    color: #ffffff;
+}
+
+.agent-perf-rank.default {
+    background: rgba(100, 130, 255, 0.2);
+    color: rgba(100, 130, 255, 0.9);
+}
+
+.agent-perf-info {
+    flex-grow: 1;
+}
+
+.agent-perf-name {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.agent-perf-stats {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+.agent-perf-score {
+    text-align: right;
+}
+
+.agent-perf-pct {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.agent-perf-pct.high {
+    color: #22c55e;
+}
+
+.agent-perf-pct.medium {
+    color: #f59e0b;
+}
+
+.agent-perf-pct.low {
+    color: #ef4444;
+}
+
+.agent-perf-bar {
+    width: 80px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.agent-perf-fill {
+    height: 100%;
+    border-radius: 3px;
+}
+
+/* ============================================
+   Goal Progress Indicator
+   ============================================ */
+
+.goal-container {
+    background: rgba(15, 15, 22, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.goal-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.goal-value {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.goal-bar {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.goal-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.goal-fill.success {
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+.goal-fill.warning {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.goal-fill.danger {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.goal-marker {
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.goal-status {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   Feedback Analytics - KPI Cards
+   ============================================ */
+
+.kpi-card {
+    background: rgba(15, 15, 22, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.25rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.kpi-card.highlight {
+    border-color: rgba(100, 130, 255, 0.3);
+    background: linear-gradient(135deg, rgba(100, 130, 255, 0.1) 0%, rgba(15, 15, 22, 0.9) 100%);
+}
+
+.kpi-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.kpi-icon {
+    font-size: 1rem;
+}
+
+.kpi-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-detail {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.kpi-subtext {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    margin-top: 4px;
+}
+
+.kpi-progress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.kpi-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.kpi-breakdown {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 0.8rem;
+}
+
+.kpi-breakdown .positive {
+    color: #22c55e;
+}
+
+.kpi-breakdown .negative {
+    color: #ef4444;
+}
+
+/* ============================================
+   Agent Ranking Cards
+   ============================================ */
+
+.agent-rank-card {
+    background: rgba(15, 15, 22, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.agent-rank-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.agent-rank-medal {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.agent-rank-name {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.agent-rank-score {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.agent-rank-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.agent-rank-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.agent-rank-detail {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+}
+
+/* Feedback history agents badge */
+.fb-history-agents {
+    background: rgba(100, 130, 255, 0.15);
+    color: rgba(100, 130, 255, 0.9);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+}

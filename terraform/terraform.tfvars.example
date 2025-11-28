@@ -1,0 +1,5 @@
+# Copy this file to terraform.tfvars and update values
+
+aws_region   = "eu-central-1"
+environment  = "development"
+project_name = "marketing-agent"
