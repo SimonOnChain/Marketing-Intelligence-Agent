@@ -20,7 +20,9 @@
       "Bash(powershell -Command \"& ''C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\python.exe'' -m uv pip install boto3\")",
       "Bash(powershell -Command \"uv pip install boto3 --python C:\\Users\\Simon\\Project_Wifi\\.venv\\Scripts\\python.exe\")",
       "Bash(powershell -Command \"cd C:\\Users\\Simon\\Project_Wifi; & ''.\\.venv\\Scripts\\python.exe'' scripts\\quick_aws_test.py\")",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)"
     ],
     "deny": [],
     "ask": []
